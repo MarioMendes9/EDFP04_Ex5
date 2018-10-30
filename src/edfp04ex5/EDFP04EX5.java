@@ -18,11 +18,11 @@ public class EDFP04EX5 {
         //System.out.println(" Mario".compareTo(" Jorge"));
         
         nQueues n=new nQueues();
-        n.creatQue(" Mario");
-        n.creatQue(" Jorgee");
-        n.creatQue(" Mendessss");
-        n.creatQue(" leiteeeeeeeee");
-        n.creatQue(" celoricooooooooooooo");
+        n.creatQue(" Marioooooooooo");
+        n.creatQue(" Jorgeeeee");
+        n.creatQue(" Mendessssss");
+        n.creatQue(" leiteeeee");
+        n.creatQue(" celorico");
         
         n.juntaApenasNuma();
         System.out.println(n.getQuee().first().toString());

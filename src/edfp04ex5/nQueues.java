@@ -5,11 +5,13 @@
  */
 package edfp04ex5;
 
+import java.util.Comparator;
+
 /**
  *
  * @author mario
  */
-public class nQueues {
+public class nQueues implements Comparator<String>{
 
     private QueueADT<QueueADT> quee;
 
@@ -23,30 +25,42 @@ public class nQueues {
             QueueADT<String> qu1 = this.quee.dequeue();
             QueueADT<String> qu2 = this.quee.dequeue();
             QueueADT<String> qu3 = new CircularArrayQueue<>();
-            while (!qu2.isEmpty() && !qu1.isEmpty()) {
-                if (qu1.first().compareTo(qu2.first()) < 0) {
-                    qu3.enqueue(qu2.dequeue());
-                    qu3.enqueue(qu1.dequeue());
+            
+            qu3=this.une(qu1,qu2);
 
-                } else {
-                    qu3.enqueue(qu1.dequeue());
-                    qu3.enqueue(qu2.dequeue());
-
-                }
-            }
-            while (!qu2.isEmpty()) {
-                qu3.enqueue(qu2.dequeue());
-            }
-            while (!qu1.isEmpty()) {
-                qu3.enqueue(qu1.dequeue());
-            }
             quee.enqueue(qu3);
         }
 
     }
+    
+     public QueueADT<String> une(QueueADT<String> a1,QueueADT<String> a2){
+        QueueADT<String> qu3 = new CircularArrayQueue<>();
+        while(!a1.isEmpty() && !a2.isEmpty()){
+            String n;
+            //Se a1 < a2 entao retorna negativo, senao positivo 
+            if(this.compare(a1.first(), a2.first())<0){
+                n=a1.dequeue();
+            }
+            else{
+                n=a2.dequeue();
+                
+            }
+            qu3.enqueue(n);
+        }
+       while(!a1.isEmpty()){
+           qu3.enqueue(a1.dequeue());
+       }
+       while(!a2.isEmpty()){
+           qu3.enqueue(a2.dequeue());
+       }
+       
+       return qu3;
+    }
+    
 
     public void creatQue(String s) {
         QueueADT<String> ss = new CircularArrayQueue<>();
+       
         ss.enqueue(s);
         this.quee.enqueue(ss);
     }
@@ -55,4 +69,8 @@ public class nQueues {
         return quee;
     }
 
+    @Override
+    public int compare(String o1, String o2) {
+        return (o1.length()-o2.length());
+    }
 }
